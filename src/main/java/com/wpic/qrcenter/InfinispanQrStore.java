@@ -7,7 +7,16 @@ import java.util.concurrent.TimeUnit;
 
 public class InfinispanQrStore implements QrStore {
 
-    private static final Cache<String, byte[]> cache = new DefaultCacheManager().getCache();
+    private static Cache<String, byte[]> cache;
+
+    static {
+        try {
+            cache = new DefaultCacheManager("infinispan.xml").getCache();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     @Override
     public Qr load(final String url) {
