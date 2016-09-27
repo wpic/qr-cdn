@@ -36,35 +36,33 @@ import java.util.Hashtable;
  */
 public class XingQrGenerator implements QrGenerator {
 
-    /**
-     *
-     */
-    private static final int WIDTH = 250;
-
-    /**
-     *
-     */
-    private static final int HEIGHT = 250;
-
     @Override
-    public final Qr generate(final String url) throws IOException {
-        final BitMatrix bm = generateBM(url);
-        final BufferedImage bi = toBufferedImage(bm);
+    public final Qr generate(final QrRequest request) throws IOException {
+        final BitMatrix bm = generateBM(request.getText(), request.getSize());
+        final BufferedImage bi = toBufferedImage(bm, request.getColor(), request.getBg());
 
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(bi, "PNG", baos);
         final byte[] data = baos.toByteArray();
 
-        return new Qr(url, data, "image/png");
+        return Qr.builder()
+                .text(request.getText())
+                .size(request.getSize())
+                .color(request.getColor())
+                .icon(request.getIcon())
+                .data(data)
+                .contentType("image/png")
+                .build();
     }
 
     /**
      *
      * @param path path
+     * @param size size
      * @return return
      * @throws IOException io
      */
-    private BitMatrix generateBM(final String path) throws IOException {
+    private BitMatrix generateBM(final String path, final Size size) throws IOException {
         final Hashtable hintMap = new Hashtable();
         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
         final QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -73,8 +71,8 @@ public class XingQrGenerator implements QrGenerator {
             bitMatrix = qrCodeWriter.encode(
                     path,
                     BarcodeFormat.QR_CODE,
-                    WIDTH,
-                    HEIGHT,
+                    size.getWidth(),
+                    size.getHeight(),
                     hintMap);
         } catch (WriterException ex) {
             throw new IOException(ex);
@@ -85,17 +83,23 @@ public class XingQrGenerator implements QrGenerator {
     /**
      *
      * @param matrix matrix
+     * @param color color
+     * @param bg bg
      * @return return
      */
-    private BufferedImage toBufferedImage(final BitMatrix matrix) {
+    private BufferedImage toBufferedImage(final BitMatrix matrix, final Color color, final Color bg) {
         final int width = matrix.getWidth();
         final int height = matrix.getHeight();
-        final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        final BufferedImage image = new BufferedImage(width, height,BufferedImage.TYPE_INT_RGB);
         final int[] pixels = new int[width * height];
         int index = 0;
+
+        final int pixelColor = color.getRGB();
+        final int bgColor = bg.getRGB();
+
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                pixels[index++] = matrix.get(x, y) ? Color.BLACK.getRGB() : Color.WHITE.getRGB();
+                pixels[index++] = matrix.get(x, y) ? pixelColor : bgColor;
             }
         }
         image.setRGB(0, 0, width, height, pixels, 0, width);
