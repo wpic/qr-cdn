@@ -46,14 +46,14 @@ public class QrService {
 
     /**
      *
-     * @param url url
+     * @param request request
      * @return return
      * @throws IOException io
      */
-    public final Qr get(final String url) throws IOException {
-        Qr qr = this.store.load(url);
+    public Qr get(final QrRequest request) throws IOException {
+        Qr qr = this.store.load(request);
         if (qr == null) {
-            qr = this.generator.generate(url);
+            qr = this.generator.generate(request);
             this.store.store(qr);
         }
         return qr;
