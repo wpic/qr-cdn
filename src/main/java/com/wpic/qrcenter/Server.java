@@ -38,8 +38,8 @@ public class Server {
 
         @Override
         public void handleRequest(final HttpServerExchange exchange) throws Exception {
-            final UrlParser u = UrlParser.parse(exchange.getRequestURI().substring(1));
-            final Qr qr = service.get(u.getText());
+            final QrRequest request = QrRequest.builder().parse(exchange.getRequestURI().substring(1)).build();
+            final Qr qr = service.get(request);
             if (qr != null) {
                 exchange.getResponseHeaders().add(HttpString.tryFromString("Content-Type"), qr.getContentType());
                 exchange.getResponseHeaders().add(HttpString.tryFromString("Cache-Control"), "max-stale=31536000");

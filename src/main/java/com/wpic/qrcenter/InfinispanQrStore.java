@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class InfinispanQrStore implements QrStore {
 
-    private static Cache<String, byte[]> cache;
+    private static Cache<String, Qr> cache;
 
     static {
         try {
@@ -19,16 +19,15 @@ public class InfinispanQrStore implements QrStore {
     }
 
     @Override
-    public Qr load(final String url) {
-        if (cache.containsKey(url)) {
-            return new Qr(url, cache.get(url), "image/png");
-        }
-        return null;
+    public Qr load(final QrRequest request) {
+        final String key = request.getText() + "-" + request.getColor().getRGB() + "-" + request.getSize().getWidth();
+        return cache.get(key);
     }
 
     @Override
     public void store(final Qr qr) {
-        cache.put(qr.getUrl(), qr.getData());
+        final String key = qr.getText() + "-" + qr.getColor().getRGB() + "-" + qr.getSize().getWidth();
+        cache.put(key, qr);
     }
 
 }

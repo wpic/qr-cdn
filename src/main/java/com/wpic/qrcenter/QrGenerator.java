@@ -4,6 +4,6 @@ import java.io.IOException;
 
 public interface QrGenerator {
 
-    Qr generate(String url) throws IOException;
+    Qr generate(QrRequest request) throws IOException;
 
 }

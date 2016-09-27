@@ -1,15 +1,29 @@
 package com.wpic.qrcenter;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.awt.*;
+import java.io.Serializable;
+
 @ToString(exclude = "data")
 @AllArgsConstructor
-public class Qr {
+@Builder
+public class Qr implements Serializable {
 
     @Getter
-    private String url;
+    private String text;
+
+    @Getter
+    private Color color;
+
+    @Getter
+    private Size size;
+
+    @Getter
+    private Boolean icon;
 
     @Getter
     private byte[] data;
