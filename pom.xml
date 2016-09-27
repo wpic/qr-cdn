@@ -8,6 +8,10 @@
     <artifactId>com.wpic.qrcenter</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <version.infinispan>8.2.4.Final</version.infinispan>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>io.undertow</groupId>
@@ -23,8 +27,13 @@
         <dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-embedded</artifactId>
-            <version>8.2.1.Final</version>
+            <version>${version.infinispan}</version>
         </dependency>
+        <!--<dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-persistence-soft-index</artifactId>
+            <version>${version.infinispan}</version>
+        </dependency>-->
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>core</artifactId>

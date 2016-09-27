@@ -28,7 +28,7 @@ public class InfinispanQrStore implements QrStore {
 
     @Override
     public void store(final Qr qr) {
-        cache.put(qr.getUrl(), qr.getData(), 30, TimeUnit.DAYS, 7, TimeUnit.DAYS);
+        cache.put(qr.getUrl(), qr.getData());
     }
 
 }

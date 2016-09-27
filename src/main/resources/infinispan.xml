@@ -6,7 +6,10 @@
 
     <cache-container default-cache="default">
         <local-cache name="default">
-            <eviction strategy="LIRS" max-entries="10" />
+            <eviction max-entries="10000" />
+            <expiration lifespan="43200000" max-idle="10080000" interval="360000" />
+
+            <!-- TODO: Eventually we have to use 'soft-index-file-store' for large amount of entities -->
             <persistence>
                 <file-store path="${user.dir}/data">
                     <write-behind />
