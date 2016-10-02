@@ -1,18 +1,49 @@
+/*
+ * qr-cdn - 2016
+ * http://github.com/abdollahpour/qr-cdn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 package com.wpic.qrcenter;
 
 import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 import io.undertow.util.HttpString;
+import io.undertow.util.StatusCodes;
 
 import java.nio.ByteBuffer;
 
+/**
+ *
+ */
 public class Server {
 
+    /**
+     *
+     */
     private final Undertow server;
 
+    /**
+     *
+     */
     private final QrService service;
 
+    /**
+     *
+     * @param service service
+     */
     public Server(final QrService service) {
         this.service = service;
 
@@ -25,15 +56,23 @@ public class Server {
                 .build();
     }
 
-
-    public void start() {
+    /**
+     *
+     */
+    public final void start() {
         this.server.start();
     }
 
-    public void stop() {
+    /**
+     *
+     */
+    public final void stop() {
         this.server.stop();
     }
 
+    /**
+     *
+     */
     private class ImageHandler implements HttpHandler {
 
         @Override
@@ -44,9 +83,8 @@ public class Server {
                 exchange.getResponseHeaders().add(HttpString.tryFromString("Cache-Control"), "max-stale=31536000");
 
                 exchange.getResponseSender().send(ByteBuffer.wrap(qr.getData()));
-            }
-            else {
-                exchange.setStatusCode(404);
+            } else {
+                exchange.setStatusCode(StatusCodes.NOT_FOUND);
             }
         }
 
