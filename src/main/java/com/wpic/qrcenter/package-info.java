@@ -15,24 +15,7 @@
  *  limitations under the License.
  */
 
-package com.wpic.qrcenter;
-
 /**
- *
+ * Main package.
  */
-public interface QrStore {
-
-    /**
-     *
-     * @param url url
-     * @return return
-     */
-    Qr load(String url);
-
-    /**
-     *
-     * @param qr qr
-     */
-    void store(Qr qr);
-
-}
+package com.wpic.qrcenter;
