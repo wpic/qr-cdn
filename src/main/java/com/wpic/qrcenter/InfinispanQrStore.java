@@ -3,7 +3,6 @@ package com.wpic.qrcenter;
 import org.infinispan.Cache;
 import org.infinispan.manager.DefaultCacheManager;
 
-import java.util.concurrent.TimeUnit;
 
 public class InfinispanQrStore implements QrStore {
 
@@ -28,7 +27,8 @@ public class InfinispanQrStore implements QrStore {
 
     @Override
     public void store(final Qr qr) {
-        cache.put(qr.getUrl(), qr.getData());
+        // Stores it fast and don't care about the errors, any error happens (like lake of memory) system still works.
+        cache.putForExternalRead(qr.getUrl(), qr.getData());
     }
 
 }

@@ -1,0 +1,44 @@
+<html>
+<body>
+<input id="source" type="text" />
+<br/>
+<img id="preview" src="" />
+<br/>
+<input id="code" type="text" />
+<script>
+function debounce(func, wait, immediate) {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+};
+
+var source = document.getElementById('source');
+var code = document.getElementById('code');
+var preview = document.getElementById('preview');
+
+var keyup = debounce(function() {
+	preview.src = 'http://qr-cdn.com/' + this.value;
+	code.value = '<img width="128" heigh="128" src="http://qr-cdn.com/' + this.value + '" />';
+}, 250);
+source.addEventListener('keyup', keyup);
+source.addEventListener('change', keyup);
+code.addEventListener('click', function() {
+	this.setSelectionRange(0, this.value.length);
+});
+
+source.value = window.location.href;
+var event = new Event('change');
+source.dispatchEvent(event);
+
+</script>
+</body>
+</html>
