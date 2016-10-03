@@ -23,6 +23,7 @@ import io.undertow.server.HttpServerExchange;
 import io.undertow.util.HttpString;
 import io.undertow.util.StatusCodes;
 
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 /**
@@ -85,16 +86,14 @@ public class Server {
 
                 exchange.getRequestHeaders().put(HttpString.tryFromString("Content-Type"), "text/html; charset: UTF-8");
                 exchange.getResponseSender().send(ByteBuffer.wrap(data));
-            }
-            else if ("favicon.ico".equals(uri)) {
+            } else if ("favicon.ico".equals(uri)) {
                 final InputStream inputStream = ClassLoader.getSystemResourceAsStream("favicon.ico");
                 final byte[] data = new byte[inputStream.available()];
                 inputStream.read(data);
 
                 exchange.getRequestHeaders().put(HttpString.tryFromString("Content-Type"), "image/x-icon");
                 exchange.getResponseSender().send(ByteBuffer.wrap(data));
-            }
-            else {
+            } else {
                 final Qr qr = service.get(uri);
                 if (qr != null) {
                     exchange.getResponseHeaders().add(HttpString.tryFromString("Content-Type"), qr.getContentType());
@@ -102,7 +101,7 @@ public class Server {
 
                     exchange.getResponseSender().send(ByteBuffer.wrap(qr.getData()));
                 } else {
-                    exchange.setStatusCode(404);
+                    exchange.setStatusCode(StatusCodes.NOT_FOUND);
                 }
             }
         }
