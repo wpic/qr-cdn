@@ -1,3 +1,20 @@
+/*
+ * qr-cdn - 2016
+ * http://github.com/abdollahpour/qr-cdn
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 package com.wpic.qrcenter;
 
 import lombok.AllArgsConstructor;
@@ -5,37 +22,62 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
-import java.awt.*;
+import java.awt.Color;
 
+/**
+ *
+ */
 @ToString
 @AllArgsConstructor
-public class QrRequest {
+public final class QrRequest {
 
     private QrRequest() {
 
     }
 
+    /**
+     *
+     */
     @Getter
     @NonNull
     private String text;
 
+    /**
+     *
+     */
     @Getter
     private Color color;
 
+    /**
+     *
+     */
     @Getter
     private Color bg;
 
+    /**
+     *
+     */
     @Getter
     private Size size;
 
+    /**
+     *
+     */
     @Getter
     private Boolean icon;
 
+    /**
+     *
+     * @return return
+     */
     public static Builder builder() {
         return new Builder();
     }
 
-    public static class Builder {
+    /**
+     *
+     */
+    public static final class Builder {
 
         private String text;
 
@@ -51,31 +93,60 @@ public class QrRequest {
 
         }
 
-        public Builder text(String text) {
+        /**
+         *
+         * @param text text
+         * @return
+         */
+        public Builder text(final String text) {
             this.text = text;
             return this;
         }
 
-        public Builder color(Color color) {
+        /**
+         *
+         * @param color color
+         * @return return
+         */
+        public Builder color(final Color color) {
             this.color = color;
             return this;
         }
 
-        public Builder bg(Color bg) {
+        /**
+         *
+         * @param bg bg
+         * @return return
+         */
+        public Builder bg(final Color bg) {
             this.bg = bg;
             return this;
         }
 
-        public Builder size(Size size) {
+        /**
+         *
+         * @param size size
+         * @return return
+         */
+        public Builder size(final Size size) {
             this.size = size;
             return this;
         }
 
-        public Builder icon(Boolean icon) {
+        /**
+         *
+         * @param icon icon
+         * @return return
+         */
+        public Builder icon(final Boolean icon) {
             this.icon = icon;
             return this;
         }
 
+        /**
+         *
+         * @return return
+         */
         public QrRequest build() {
             return new QrRequest(
                     this.text,
@@ -86,6 +157,11 @@ public class QrRequest {
             );
         }
 
+        /**
+         *
+         * @param uri uri
+         * @return return
+         */
         public Builder parse(final String uri) {
             int index;
             int start = 0;
@@ -103,12 +179,10 @@ public class QrRequest {
                     }
 
                     start = index + 1;
-                }
-                else if (p.matches("[0-9a-fA-F]{3}") || p.matches("[0-9a-fA-F]{6}")) {
+                } else if (p.matches("[0-9a-fA-F]{3}") || p.matches("[0-9a-fA-F]{6}")) {
                     this.color = hex2Rgb(p);
                     start = index + 1;
-                }
-                else if (p.equalsIgnoreCase("icon")) {
+                } else if (p.equalsIgnoreCase("icon")) {
                     this.icon = Boolean.TRUE;
                     start = index + 1;
                 }
