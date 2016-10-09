@@ -39,13 +39,13 @@ public class InfinispanQrStore implements QrStore {
     }
 
     @Override
-    public Qr load(final QrRequest request) {
+    public final Qr load(final QrRequest request) {
         final String key = request.getText() + "-" + request.getColor().getRGB() + "-" + request.getSize().getWidth();
         return cache.get(key);
     }
 
     @Override
-    public void store(final Qr qr) {
+    public final void store(final Qr qr) {
         final String key = qr.getText() + "-" + qr.getColor().getRGB() + "-" + qr.getSize().getWidth();
         cache.put(key, qr);
     }

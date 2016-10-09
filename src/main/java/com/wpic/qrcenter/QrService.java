@@ -50,7 +50,7 @@ public class QrService {
      * @return return
      * @throws IOException io
      */
-    public Qr get(final QrRequest request) throws IOException {
+    public final Qr get(final QrRequest request) throws IOException {
         Qr qr = this.store.load(request);
         if (qr == null) {
             qr = this.generator.generate(request);

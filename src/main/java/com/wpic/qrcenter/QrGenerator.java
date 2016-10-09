@@ -24,13 +24,12 @@ import java.io.IOException;
  */
 public interface QrGenerator {
 
-    Qr generate(QrRequest request) throws IOException;
     /**
      *
-     * @param url url
+     * @param request request
      * @return return
      * @throws IOException io
      */
-    Qr generate(String url) throws IOException;
+    Qr generate(QrRequest request) throws IOException;
 
 }

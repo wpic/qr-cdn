@@ -180,13 +180,12 @@ public final class QrRequest {
 
                     start = index + 1;
                 } else if (p.matches("[0-9a-fA-F]{3}") || p.matches("[0-9a-fA-F]{6}")) {
-                    this.color = hex2Rgb(p);
+                    this.color = this.hex2Rgb(p);
                     start = index + 1;
                 } else if (p.equalsIgnoreCase("icon")) {
                     this.icon = Boolean.TRUE;
                     start = index + 1;
-                }
-                else {
+                } else {
                     break;
                 }
             }
@@ -204,8 +203,7 @@ public final class QrRequest {
                         (i & 0xF0) * (i & 0xF0) >> 4,
                         (i & 0xF) * (i & 0xF)
                 );
-            }
-            else {
+            } else {
                 final int i = Integer.parseInt(colorStr, 16);
                 return new Color(
                         (i & 0xFF0000) >> 16,

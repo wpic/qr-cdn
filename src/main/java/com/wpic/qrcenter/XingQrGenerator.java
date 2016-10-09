@@ -38,8 +38,8 @@ public class XingQrGenerator implements QrGenerator {
 
     @Override
     public final Qr generate(final QrRequest request) throws IOException {
-        final BitMatrix bm = generateBM(request.getText(), request.getSize());
-        final BufferedImage bi = toBufferedImage(bm, request.getColor(), request.getBg());
+        final BitMatrix bm = this.generateBM(request.getText(), request.getSize());
+        final BufferedImage bi = this.toBufferedImage(bm, request.getColor(), request.getBg());
 
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(bi, "PNG", baos);
@@ -90,7 +90,7 @@ public class XingQrGenerator implements QrGenerator {
     private BufferedImage toBufferedImage(final BitMatrix matrix, final Color color, final Color bg) {
         final int width = matrix.getWidth();
         final int height = matrix.getHeight();
-        final BufferedImage image = new BufferedImage(width, height,BufferedImage.TYPE_INT_RGB);
+        final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         final int[] pixels = new int[width * height];
         int index = 0;
 
