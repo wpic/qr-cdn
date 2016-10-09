@@ -95,14 +95,13 @@ public class Server {
                 exchange.getResponseSender().send(ByteBuffer.wrap(data));
             } else {
                 final QrRequest request = QrRequest.builder().parse(exchange.getRequestURI().substring(1)).build();
-                final Qr qr = service.get(request);
+                final Qr qr = Server.this.service.get(request);
                 if (qr != null) {
                     exchange.getResponseHeaders().add(HttpString.tryFromString("Content-Type"), qr.getContentType());
                     exchange.getResponseHeaders().add(HttpString.tryFromString("Cache-Control"), "max-stale=31536000");
 
                     exchange.getResponseSender().send(ByteBuffer.wrap(qr.getData()));
-                }
-                else {
+                } else {
                     exchange.setStatusCode(StatusCodes.NOT_FOUND);
                 }
             }
