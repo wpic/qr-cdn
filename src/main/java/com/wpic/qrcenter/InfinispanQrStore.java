@@ -28,7 +28,7 @@ public class InfinispanQrStore implements QrStore {
     /**
      *
      */
-    private static Cache<String, Qr> cache;
+    private static Cache<Integer, Qr> cache;
 
     static {
         try {
@@ -40,14 +40,12 @@ public class InfinispanQrStore implements QrStore {
 
     @Override
     public final Qr load(final QrRequest request) {
-        final String key = request.getText() + "-" + request.getColor().getRGB() + "-" + request.getSize().getWidth();
-        return cache.get(key);
+        return cache.get(request.hashCode());
     }
 
     @Override
-    public final void store(final Qr qr) {
-        final String key = qr.getText() + "-" + qr.getColor().getRGB() + "-" + qr.getSize().getWidth();
-        cache.putForExternalRead(key, qr);
+    public final void store(final QrRequest qrRequest, final Qr qr) {
+        cache.putForExternalRead(qrRequest.hashCode(), qr);
     }
 
 }

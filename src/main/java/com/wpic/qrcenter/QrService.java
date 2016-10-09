@@ -54,7 +54,8 @@ public class QrService {
         Qr qr = this.store.load(request);
         if (qr == null) {
             qr = this.generator.generate(request);
-            this.store.store(qr);
+
+            this.store.store(request, qr);
         }
         return qr;
     }

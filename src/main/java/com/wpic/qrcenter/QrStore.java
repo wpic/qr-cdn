@@ -31,8 +31,9 @@ public interface QrStore {
 
     /**
      *
+     * @param request request
      * @param qr qr
      */
-    void store(Qr qr);
+    void store(QrRequest request, Qr qr);
 
 }

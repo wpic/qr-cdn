@@ -17,10 +17,7 @@
 
 package com.wpic.qrcenter;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.ToString;
+import lombok.*;
 
 import java.awt.Color;
 
@@ -29,6 +26,7 @@ import java.awt.Color;
  */
 @ToString
 @AllArgsConstructor
+@EqualsAndHashCode
 public final class QrRequest {
 
     private QrRequest() {
