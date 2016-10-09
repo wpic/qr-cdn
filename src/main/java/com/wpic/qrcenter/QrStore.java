@@ -24,10 +24,10 @@ public interface QrStore {
 
     /**
      *
-     * @param url url
+     * @param request request
      * @return return
      */
-    Qr load(String url);
+    Qr load(QrRequest request);
 
     /**
      *
