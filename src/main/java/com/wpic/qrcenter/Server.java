@@ -80,14 +80,14 @@ public class Server {
         public void handleRequest(final HttpServerExchange exchange) throws Exception {
             final String uri = exchange.getRequestURI().substring(1);
             if (uri.length() == 0) {
-                final InputStream inputStream = ClassLoader.getSystemResourceAsStream("index.html");
+                final InputStream inputStream = Server.class.getResourceAsStream("/index.html");
                 final byte[] data = new byte[inputStream.available()];
                 inputStream.read(data);
 
                 exchange.getRequestHeaders().put(HttpString.tryFromString("Content-Type"), "text/html; charset: UTF-8");
                 exchange.getResponseSender().send(ByteBuffer.wrap(data));
             } else if ("favicon.ico".equals(uri)) {
-                final InputStream inputStream = ClassLoader.getSystemResourceAsStream("favicon.ico");
+                final InputStream inputStream = Server.class.getResourceAsStream("/favicon.ico");
                 final byte[] data = new byte[inputStream.available()];
                 inputStream.read(data);
 
