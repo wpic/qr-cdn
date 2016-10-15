@@ -17,20 +17,22 @@
 
 package com.wpic.qrcenter;
 
+import lombok.NonNull;
 import org.infinispan.Cache;
 import org.infinispan.manager.DefaultCacheManager;
 
 /**
- *
+ * Store and retrieve QR code in infinispan.
  */
 public class InfinispanQrStore implements QrStore {
 
     /**
-     *
+     * Infinispan cache.
      */
     private static Cache<Integer, Qr> cache;
 
     static {
+        // Load if from configuration file.
         try {
             cache = new DefaultCacheManager("infinispan.xml").getCache();
         } catch (Exception ex) {
@@ -39,12 +41,13 @@ public class InfinispanQrStore implements QrStore {
     }
 
     @Override
-    public final Qr load(final QrRequest request) {
+    public final Qr load(@NonNull final QrRequest request) {
         return cache.get(request.hashCode());
     }
 
     @Override
-    public final void store(final QrRequest qrRequest, final Qr qr) {
+    public final void store(@NonNull final QrRequest qrRequest, @NonNull final Qr qr) {
+        // Store it in catch, but if it fails, just ignore.
         cache.putForExternalRead(qrRequest.hashCode(), qr);
     }
 

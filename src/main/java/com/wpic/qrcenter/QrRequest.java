@@ -30,42 +30,41 @@ import java.awt.Color;
 public final class QrRequest {
 
     private QrRequest() {
-
     }
 
     /**
-     *
+     * Text which we want to generate QR code from.
      */
     @Getter
     @NonNull
     private String text;
 
     /**
-     *
+     * Color of the QR code. Default is Color.BLACK.
      */
     @Getter
     private Color color;
 
     /**
-     *
+     * Background color for the QR code.
      */
     @Getter
     private Color bg;
 
     /**
-     *
+     * Size of the QR code. Default is 256x256.
      */
     @Getter
     private Size size;
 
     /**
-     *
+     * Generate icon from favicon.ico of text, if text is URL and if favicon is available.
      */
     @Getter
     private Boolean icon;
 
     /**
-     *
+     * Create new builder.
      * @return return
      */
     public static Builder builder() {
@@ -73,7 +72,7 @@ public final class QrRequest {
     }
 
     /**
-     *
+     * Builder class.
      */
     public static final class Builder {
 

@@ -17,23 +17,25 @@
 
 package com.wpic.qrcenter;
 
+import lombok.NonNull;
+
 /**
- *
+ * Store and retrieve QR code.
  */
 public interface QrStore {
 
     /**
-     *
+     * Load QR.
      * @param request request
-     * @return return
+     * @return return QR code or null if it does not find.
      */
-    Qr load(QrRequest request);
+    Qr load(@NonNull QrRequest request);
 
     /**
-     *
+     * Store QR code, for given request.
      * @param request request
      * @param qr qr
      */
-    void store(QrRequest request, Qr qr);
+    void store(@NonNull QrRequest request, @NonNull Qr qr);
 
 }

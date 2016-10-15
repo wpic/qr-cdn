@@ -17,16 +17,13 @@
 
 package com.wpic.qrcenter;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.awt.Color;
 import java.io.Serializable;
 
 /**
- *
+ * QR model.
  */
 @ToString(exclude = "data")
 @AllArgsConstructor
@@ -34,37 +31,38 @@ import java.io.Serializable;
 public class Qr implements Serializable {
 
     /**
-     *
+     * Text which we want to generate QR code from.
      */
     @Getter
+    @NonNull
     private String text;
 
     /**
-     *
+     * Color of the QR code. Default is Color.BLACK.
      */
     @Getter
     private Color color;
 
     /**
-     *
+     * Size of the QR code. Default is 256x256.
      */
     @Getter
     private Size size;
 
     /**
-     *
+     * Generate icon from favicon.ico of text, if text is URL and if favicon is available.
      */
     @Getter
     private Boolean icon;
 
     /**
-     *
+     * Byte for image data generate by QR code generator.
      */
     @Getter
     private byte[] data;
 
     /**
-     *
+     * Image contentType.
      */
     @Getter
     private String contentType;

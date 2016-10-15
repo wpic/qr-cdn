@@ -20,15 +20,15 @@ package com.wpic.qrcenter;
 import java.io.IOException;
 
 /**
- *
+ * QR code generator.
  */
 public interface QrGenerator {
 
     /**
-     *
+     * Generate QR code from the request.
      * @param request request
-     * @return return
-     * @throws IOException io
+     * @return return Generated QR code.
+     * @throws IOException if any error happens during the convertion.
      */
     Qr generate(QrRequest request) throws IOException;
 
