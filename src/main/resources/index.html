@@ -27,7 +27,7 @@ var preview = document.getElementById('preview');
 
 var keyup = debounce(function() {
 	preview.src = 'http://qr-cdn.com/' + this.value;
-	code.value = '<img width="128" heigh="128" src="http://qr-cdn.com/' + this.value + '" />';
+	code.value = '<img width="128" height="128" src="http://qr-cdn.com/' + this.value + '" />';
 }, 250);
 source.addEventListener('keyup', keyup);
 source.addEventListener('change', keyup);
@@ -35,7 +35,7 @@ code.addEventListener('click', function() {
 	this.setSelectionRange(0, this.value.length);
 });
 
-source.value = window.location.href;
+source.value = 'qr-cdn';
 var event = new Event('change');
 source.dispatchEvent(event);
 

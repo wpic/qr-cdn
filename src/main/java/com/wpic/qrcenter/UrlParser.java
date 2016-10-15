@@ -60,7 +60,7 @@ public final class UrlParser {
                 up.size = p;
                 start = index + 1;
             } else if (p.matches("[0-9a-fA-F]{3,8}")) {
-                up.color = p.substring(1);
+                up.color = p;
                 start = index + 1;
             } else if (p.equalsIgnoreCase("icon")) {
                 up.icon = Boolean.TRUE;
