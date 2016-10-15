@@ -59,7 +59,7 @@ public final class UrlParser {
             if (p.matches("[0-9]{1,3}x[0-9]{1,3}")) {
                 up.size = p;
                 start = index + 1;
-            } else if (p.matches("#[0-9a-fA-F]{3,8}")) {
+            } else if (p.matches("[0-9a-fA-F]{3,8}")) {
                 up.color = p.substring(1);
                 start = index + 1;
             } else if (p.equalsIgnoreCase("icon")) {
