@@ -28,7 +28,7 @@ public class InfinispanQrStore implements QrStore {
     /**
      *
      */
-    private static Cache<String, byte[]> cache;
+    private static Cache<Integer, Qr> cache;
 
     static {
         try {
@@ -39,17 +39,13 @@ public class InfinispanQrStore implements QrStore {
     }
 
     @Override
-    public final Qr load(final String url) {
-        if (cache.containsKey(url)) {
-            return new Qr(url, cache.get(url), "image/png");
-        }
-        return null;
+    public final Qr load(final QrRequest request) {
+        return cache.get(request.hashCode());
     }
 
     @Override
-    public final void store(final Qr qr) {
-        // Stores it fast and don't care about the errors, any error happens (like lake of memory) system still works.
-        cache.putForExternalRead(qr.getUrl(), qr.getData());
+    public final void store(final QrRequest qrRequest, final Qr qr) {
+        cache.put(qrRequest.hashCode(), qr);
     }
 
 }

@@ -17,47 +17,41 @@
 
 package com.wpic.qrcenter;
 
-import java.io.IOException;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  *
  */
-public class QrService {
+@ToString
+@AllArgsConstructor
+@EqualsAndHashCode
+public class Size implements Serializable {
 
     /**
      *
      */
-    private final QrStore store;
+    @Getter
+    private Integer width;
 
     /**
      *
      */
-    private final QrGenerator generator;
+    @Getter
+    private Integer height;
 
     /**
      *
-     * @param store store
-     * @param generator generator
-     */
-    public QrService(final QrStore store, final QrGenerator generator) {
-        this.store = store;
-        this.generator = generator;
-    }
-
-    /**
-     *
-     * @param request request
+     * @param size size
      * @return return
-     * @throws IOException io
      */
-    public final Qr get(final QrRequest request) throws IOException {
-        Qr qr = this.store.load(request);
-        if (qr == null) {
-            qr = this.generator.generate(request);
-
-            this.store.store(request, qr);
-        }
-        return qr;
+    public static Size fromString(final String size) {
+        final String[] parts = size.split("x");
+        return new Size(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
     }
 
 }

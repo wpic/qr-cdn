@@ -81,9 +81,14 @@
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
-        <module name="JavadocMethod"/>
+        <module name="JavadocMethod">
+            <property name="excludeScope" value="private"/>
+            <property name="allowMissingReturnTag" value="true" />
+        </module>
         <module name="JavadocType"/>
-        <module name="JavadocVariable"/>
+        <module name="JavadocVariable">
+            <property name="excludeScope" value="private"/>
+        </module>
         <module name="JavadocStyle"/>
 
         <!-- Checks for Naming Conventions.                  -->
@@ -100,7 +105,9 @@
 
         <!-- Checks for imports                              -->
         <!-- See http://checkstyle.sf.net/config_import.html -->
-        <module name="AvoidStarImport"/>
+        <module name="AvoidStarImport">
+            <property name="excludes" value="lombok" />
+        </module>
         <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
         <module name="RedundantImport"/>
         <module name="UnusedImports">
@@ -146,12 +153,16 @@
         <!--<module name="AvoidInlineConditionals"/>-->
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
-        <module name="HiddenField">
+
+        <!-- Disable because of conflict with builder pattern -->
+        <!--<module name="HiddenField">
             <property name="ignoreConstructorParameter" value="true" />
-        </module>
+        </module>-->
+        <module name="FinalLocalVariable" />
+        <module name="RequireThis" />
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
-        <module name="MagicNumber"/>
+        <!--<module name="MagicNumber"/>-->
         <module name="MissingSwitchDefault"/>
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>

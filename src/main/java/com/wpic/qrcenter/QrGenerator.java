@@ -26,10 +26,10 @@ public interface QrGenerator {
 
     /**
      *
-     * @param url url
+     * @param request request
      * @return return
      * @throws IOException io
      */
-    Qr generate(String url) throws IOException;
+    Qr generate(QrRequest request) throws IOException;
 
 }

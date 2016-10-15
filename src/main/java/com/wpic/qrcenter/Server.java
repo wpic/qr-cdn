@@ -94,7 +94,8 @@ public class Server {
                 exchange.getRequestHeaders().put(HttpString.tryFromString("Content-Type"), "image/x-icon");
                 exchange.getResponseSender().send(ByteBuffer.wrap(data));
             } else {
-                final Qr qr = service.get(uri);
+                final QrRequest request = QrRequest.builder().parse(exchange.getRequestURI().substring(1)).build();
+                final Qr qr = Server.this.service.get(request);
                 if (qr != null) {
                     exchange.getResponseHeaders().add(HttpString.tryFromString("Content-Type"), qr.getContentType());
                     exchange.getResponseHeaders().add(HttpString.tryFromString("Cache-Control"), "max-stale=31536000");
