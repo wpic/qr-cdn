@@ -35,3 +35,11 @@ You can easily run it with Docker
     docker run -it -p 80:8080 qrcenter
 
 Server is up on port 80.
+
+
+Change log
+==========
+* 1.1:
+  * Add size support.
+  * Add color support.
+* 1.0: First release.

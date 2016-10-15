@@ -10,6 +10,7 @@
 
     <properties>
         <version.infinispan>8.2.4.Final</version.infinispan>
+        <version.jersey>2.23.2</version.jersey>
         <checkstyleDir>${basedir}</checkstyleDir>
     </properties>
 
@@ -45,6 +46,24 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.9.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>${version.jersey}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${version.jersey}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
