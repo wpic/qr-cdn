@@ -1,3 +1,31 @@
+[QR code] is one the best way to share link, text, contact and more with mobile users.
+Number of use cases you can use QR code is countless.
+
+**qr-center** can covers many of them! 
+- Easily embed in your static pages.
+- Access fast all around the world (CDN).
+- Generate dynamic QR code very fast.
+
+How to use it?
+==============
+You can simply call the URL, system automatically generates the QR code for you:
+
+    # Simple text
+    http://SERVER/sample+text
+    
+    # From URL
+    http://SERVER/http://you/website/page
+    
+    # Change sizes. If supports 128x128, 256x256 & 512x512
+    http://SERVER/128x128/test
+    
+    # Also color. This one is blue.
+    http://SERVER/0011FF/blue+one
+    http://SERVER/256x256/1100FF/big+blue+one
+    
+System & browser cache the code, it's always fast!
+    
+
 Build it
 ========
 Simply build it with maven:
@@ -43,3 +71,6 @@ Change log
   * Add size support.
   * Add color support.
 * 1.0: First release.
+
+
+[QR code]: https://en.wikipedia.org/wiki/QR_code
