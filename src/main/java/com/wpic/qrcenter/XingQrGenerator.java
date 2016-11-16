@@ -26,9 +26,11 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import javax.imageio.ImageIO;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Hashtable;
 
 /**
@@ -38,8 +40,23 @@ public class XingQrGenerator implements QrGenerator {
 
     @Override
     public final Qr generate(final QrRequest request) throws IOException {
-        final BitMatrix bm = this.generateBM(request.getText(), request.getSize());
+        BufferedImage icon = null;
+        if (Boolean.TRUE.equals(request.getIcon())) {
+            try {
+                final URL url = new URL(request.getText());
+                icon = IconTools.load(url);
+            } catch (Exception e) {
+                e.printStackTrace();
+                // ignore, it's not URL or icon has problem
+            }
+        }
+
+        final BitMatrix bm = this.generateBM(request.getText(), request.getSize(), icon != null);
         final BufferedImage bi = this.toBufferedImage(bm, request.getColor(), request.getBg());
+
+        if (icon != null) {
+            this.addIcon(bi, icon);
+        }
 
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(bi, "PNG", baos);
@@ -55,6 +72,14 @@ public class XingQrGenerator implements QrGenerator {
                 .build();
     }
 
+    private void addIcon(final BufferedImage bi, final BufferedImage icon) {
+        final int w = bi.getWidth() / 5;
+        final int h = bi.getHeight() / 5;
+
+        final Graphics g = bi.getGraphics();
+        g.drawImage(icon, w * 2, h * 2, w, h, null);
+    }
+
     /**
      *
      * @param path path
@@ -62,9 +87,9 @@ public class XingQrGenerator implements QrGenerator {
      * @return return
      * @throws IOException io
      */
-    private BitMatrix generateBM(final String path, final Size size) throws IOException {
+    private BitMatrix generateBM(final String path, final Size size, final boolean high) throws IOException {
         final Hashtable hintMap = new Hashtable();
-        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+        hintMap.put(EncodeHintType.ERROR_CORRECTION, high ? ErrorCorrectionLevel.H : ErrorCorrectionLevel.L);
         final QRCodeWriter qrCodeWriter = new QRCodeWriter();
         final BitMatrix bitMatrix;
         try {
