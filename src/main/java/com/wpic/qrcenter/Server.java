@@ -23,6 +23,7 @@ import io.undertow.server.HttpServerExchange;
 import io.undertow.util.HttpString;
 import io.undertow.util.StatusCodes;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
@@ -81,11 +82,17 @@ public class Server {
             final String uri = exchange.getRequestURI().substring(1);
             if (uri.length() == 0) {
                 final InputStream inputStream = Server.class.getResourceAsStream("/index.html");
-                final byte[] data = new byte[inputStream.available()];
-                inputStream.read(data);
+
+                final byte[] buffer = new byte[10240];
+                int size;
+                final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+                while ((size = inputStream.read(buffer)) > 0) {
+                    baos.write(buffer, 0, size);
+                }
 
                 exchange.getRequestHeaders().put(HttpString.tryFromString("Content-Type"), "text/html; charset: UTF-8");
-                exchange.getResponseSender().send(ByteBuffer.wrap(data));
+                exchange.getResponseSender().send(ByteBuffer.wrap(baos.toByteArray()));
             } else if ("favicon.ico".equals(uri)) {
                 final InputStream inputStream = Server.class.getResourceAsStream("/favicon.ico");
                 final byte[] data = new byte[inputStream.available()];
