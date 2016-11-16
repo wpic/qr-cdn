@@ -78,9 +78,9 @@ public final class QrRequest {
 
         private String text;
 
-        private Color color = Color.BLACK;
+        private Color color;
 
-        private Color bg = Color.WHITE;
+        private Color bg;
 
         private Size size = new Size(256, 256);
 
@@ -147,8 +147,8 @@ public final class QrRequest {
         public QrRequest build() {
             return new QrRequest(
                     this.text,
-                    this.color,
-                    this.bg,
+                    this.color == null ? Color.BLACK : this.color,
+                    this.bg == null ? Color.WHITE : this.bg,
                     this.size,
                     this.icon
             );
@@ -177,7 +177,13 @@ public final class QrRequest {
 
                     start = index + 1;
                 } else if (p.matches("[0-9a-fA-F]{3}") || p.matches("[0-9a-fA-F]{6}")) {
-                    this.color = this.hex2Rgb(p);
+                    if (this.color == null) {
+                        this.color = this.hex2Rgb(p);
+                    } else if (this.bg == null) {
+                        this.bg = this.hex2Rgb(p);
+                    } else {
+                        break;
+                    }
                     start = index + 1;
                 } else if (p.equalsIgnoreCase("icon")) {
                     this.icon = Boolean.TRUE;

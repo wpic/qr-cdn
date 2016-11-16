@@ -44,6 +44,12 @@ public class Qr implements Serializable {
     private Color color;
 
     /**
+     * Background color. Default is Color.WHITE.
+     */
+    @Getter
+    private Color bg;
+
+    /**
      * Size of the QR code. Default is 256x256.
      */
     @Getter
