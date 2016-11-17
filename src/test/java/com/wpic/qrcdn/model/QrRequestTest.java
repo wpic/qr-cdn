@@ -1,4 +1,4 @@
-package com.wpic.qrcdn;
+package com.wpic.qrcdn.model;
 
 import com.wpic.qrcdn.model.QrRequest;
 import com.wpic.qrcdn.model.Size;

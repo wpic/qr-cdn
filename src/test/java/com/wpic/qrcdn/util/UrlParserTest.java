@@ -1,4 +1,4 @@
-package com.wpic.qrcdn;
+package com.wpic.qrcdn.util;
 
 import com.wpic.qrcdn.util.UrlParser;
 import org.testng.annotations.Test;
