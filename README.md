@@ -67,6 +67,8 @@ Server is up on port 80.
 
 Change log
 ==========
+* 1.4
+  * Add icon support from favicon.
 * 1.2
   * Add background color support.
 * 1.1:
