@@ -15,27 +15,24 @@
  *  limitations under the License.
  */
 
-package com.wpic.qrcenter;
+package com.wpic.qrcdn.generator;
 
-import lombok.NonNull;
+import com.wpic.qrcdn.model.Qr;
+import com.wpic.qrcdn.model.QrRequest;
+
+import java.io.IOException;
 
 /**
- * Store and retrieve QR code.
+ * QR code generator.
  */
-public interface QrStore {
+public interface QrGenerator {
 
     /**
-     * Load QR.
+     * Generate QR code from the request.
      * @param request request
-     * @return return QR code or null if it does not find.
+     * @return return Generated QR code.
+     * @throws IOException if any error happens during the convertion.
      */
-    Qr load(@NonNull QrRequest request);
-
-    /**
-     * Store QR code, for given request.
-     * @param request request
-     * @param qr qr
-     */
-    void store(@NonNull QrRequest request, @NonNull Qr qr);
+    Qr generate(QrRequest request) throws IOException;
 
 }

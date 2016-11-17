@@ -15,32 +15,30 @@
  *  limitations under the License.
  */
 
-package com.wpic.qrcenter;
+package com.wpic.qrcdn.store;
+
+import com.wpic.qrcdn.model.Qr;
+import com.wpic.qrcdn.model.QrRequest;
+import lombok.NonNull;
+
+import java.util.Hashtable;
+import java.util.Map;
 
 /**
- *
+ * Simple in memory store for tests.
  */
-public final class App {
+public class MemoryQrStore implements QrStore {
 
-    /**
-     *
-     */
-    private App() {
+    private final Map<Integer, Qr> map = new Hashtable<>();
 
+    @Override
+    public final Qr load(@NonNull final QrRequest request) {
+        return this.map.get(request.hashCode());
     }
 
-    /**
-     *
-     * @param args args
-     * @throws Exception ex
-     */
-    public static void main(final String[] args) throws Exception {
-        final QrStore store = new InfinispanQrStore();
-        final QrGenerator generator = new XingQrGenerator();
-        final QrService service = new QrService(store, generator);
-
-        final Server server = new Server(service);
-        server.start();
+    @Override
+    public final void store(@NonNull final QrRequest request, @NonNull final Qr qr) {
+        this.map.put(request.hashCode(), qr);
     }
 
 }

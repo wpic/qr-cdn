@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 
-package com.wpic.qrcenter;
+package com.wpic.qrcdn.util;
 
 import net.sf.image4j.codec.ico.ICODecoder;
 
@@ -29,13 +29,13 @@ import java.net.URL;
 import java.util.List;
 
 /**
- *
+ * Utility for generating icon from given URL.
  */
-public final class IconTools {
+public final class IconUtil {
 
     private static final int MAX_ICON_SIZE = 1024 * 1024;
 
-    private IconTools() {
+    private IconUtil() {
 
     }
 

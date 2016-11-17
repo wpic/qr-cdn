@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 
-package com.wpic.qrcenter;
+package com.wpic.qrcdn.model;
 
 import lombok.*;
 

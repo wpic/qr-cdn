@@ -15,28 +15,29 @@
  *  limitations under the License.
  */
 
-package com.wpic.qrcenter;
+package com.wpic.qrcdn.store;
 
+import com.wpic.qrcdn.model.Qr;
+import com.wpic.qrcdn.model.QrRequest;
 import lombok.NonNull;
 
-import java.util.Hashtable;
-import java.util.Map;
-
 /**
- * Simple in memory store for tests.
+ * Store and retrieve QR code.
  */
-public class MemoryQrStore implements QrStore {
+public interface QrStore {
 
-    private final Map<Integer, Qr> map = new Hashtable<>();
+    /**
+     * Load QR.
+     * @param request request
+     * @return return QR code or null if it does not find.
+     */
+    Qr load(@NonNull QrRequest request);
 
-    @Override
-    public final Qr load(@NonNull final QrRequest request) {
-        return this.map.get(request.hashCode());
-    }
-
-    @Override
-    public final void store(@NonNull final QrRequest request, @NonNull final Qr qr) {
-        this.map.put(request.hashCode(), qr);
-    }
+    /**
+     * Store QR code, for given request.
+     * @param request request
+     * @param qr qr
+     */
+    void store(@NonNull QrRequest request, @NonNull Qr qr);
 
 }

@@ -15,8 +15,10 @@
  *  limitations under the License.
  */
 
-package com.wpic.qrcenter;
+package com.wpic.qrcdn.store;
 
+import com.wpic.qrcdn.model.Qr;
+import com.wpic.qrcdn.model.QrRequest;
 import lombok.NonNull;
 import org.infinispan.Cache;
 import org.infinispan.manager.DefaultCacheManager;

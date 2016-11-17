@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 
-package com.wpic.qrcenter;
+package com.wpic.qrcdn.generator;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -23,6 +23,10 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.wpic.qrcdn.util.IconUtil;
+import com.wpic.qrcdn.model.Qr;
+import com.wpic.qrcdn.model.QrRequest;
+import com.wpic.qrcdn.model.Size;
 
 import javax.imageio.ImageIO;
 import java.awt.Color;
@@ -44,7 +48,7 @@ public class XingQrGenerator implements QrGenerator {
         if (Boolean.TRUE.equals(request.getIcon())) {
             try {
                 final URL url = new URL(request.getText());
-                icon = IconTools.load(url);
+                icon = IconUtil.load(url);
             } catch (Exception e) {
                 e.printStackTrace();
                 // ignore, it's not URL or icon has problem

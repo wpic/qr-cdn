@@ -1,5 +1,9 @@
-package com.wpic.qrcenter;
+package com.wpic.qrcdn;
 
+import com.wpic.qrcdn.generator.QrGenerator;
+import com.wpic.qrcdn.generator.XingQrGenerator;
+import com.wpic.qrcdn.store.MemoryQrStore;
+import com.wpic.qrcdn.store.QrStore;
 import lombok.val;
 import org.apache.commons.io.IOUtils;
 import org.testng.annotations.AfterClass;

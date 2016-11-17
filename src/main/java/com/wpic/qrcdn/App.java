@@ -15,43 +15,37 @@
  *  limitations under the License.
  */
 
-package com.wpic.qrcenter;
+package com.wpic.qrcdn;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
-import java.io.Serializable;
+import com.wpic.qrcdn.generator.QrGenerator;
+import com.wpic.qrcdn.generator.XingQrGenerator;
+import com.wpic.qrcdn.store.InfinispanQrStore;
+import com.wpic.qrcdn.store.QrStore;
 
 /**
  *
  */
-@ToString
-@AllArgsConstructor
-@EqualsAndHashCode
-public class Size implements Serializable {
+public final class App {
 
     /**
      *
      */
-    @Getter
-    private Integer width;
+    private App() {
+
+    }
 
     /**
      *
+     * @param args args
+     * @throws Exception ex
      */
-    @Getter
-    private Integer height;
+    public static void main(final String[] args) throws Exception {
+        final QrStore store = new InfinispanQrStore();
+        final QrGenerator generator = new XingQrGenerator();
+        final QrService service = new QrService(store, generator);
 
-    /**
-     *
-     * @param size size
-     * @return return
-     */
-    public static Size fromString(final String size) {
-        final String[] parts = size.split("x");
-        return new Size(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+        final Server server = new Server(service);
+        server.start();
     }
 
 }

@@ -1,7 +1,7 @@
 [QR code] is one the best way to share link, text, contact and more with mobile users.
 Number of use cases you can use QR code is countless.
 
-**qr-center** can covers many of them! 
+**qr-cdn** can covers many of them! 
 - Easily embed in your static pages.
 - Access fast all around the world (CDN).
 - Generate dynamic QR code very fast.
@@ -32,7 +32,7 @@ Simply build it with maven:
 
     mvn clean install
 
-jar executable file will generate in target folder (qr-center-VERSION.jar)
+jar executable file will generate in target folder (qr-cdn-VERSION.jar)
 
 Run it
 ======
@@ -46,11 +46,11 @@ Or build the jar file:
     
 And the run it (Single file, no dependencies is required):
 
-    java -jar target/qr-center-VERSION.jar
+    java -jar target/qr-cdn-VERSION.jar
     
 To change the network interface and port you can use system environment variables `HOST` and `PORT`:
 
-    java -DHOST=192.168.0.1 -DPORT=8000 -jar target/qr-center-VERSION.jar
+    java -DHOST=192.168.0.1 -DPORT=8000 -jar target/qr-cdn-VERSION.jar
 
 
 Docker
@@ -67,6 +67,8 @@ Server is up on port 80.
 
 Change log
 ==========
+* 1.5
+  * Change the project name from qr-center to qr-code.
 * 1.4
   * Add icon support from favicon.
 * 1.2

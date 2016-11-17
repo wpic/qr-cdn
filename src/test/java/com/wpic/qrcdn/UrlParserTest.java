@@ -1,5 +1,6 @@
-package com.wpic.qrcenter;
+package com.wpic.qrcdn;
 
+import com.wpic.qrcdn.util.UrlParser;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;

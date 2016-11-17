@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 
-package com.wpic.qrcenter;
+package com.wpic.qrcdn.util;
 
 import lombok.Getter;
 import lombok.ToString;

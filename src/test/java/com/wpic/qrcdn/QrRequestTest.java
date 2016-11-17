@@ -1,5 +1,7 @@
-package com.wpic.qrcenter;
+package com.wpic.qrcdn;
 
+import com.wpic.qrcdn.model.QrRequest;
+import com.wpic.qrcdn.model.Size;
 import org.testng.annotations.Test;
 
 import java.awt.*;
