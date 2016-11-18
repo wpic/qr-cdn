@@ -240,7 +240,7 @@ function createQRcode(fromColor){
     var preview = $("#preview");
     var code = $("#code");
     var codestr = '<img width="' + w + '" height="' + h +'" src="http://qr-cdn.com/' + src + '" />';
-    var leftMargin = topMargin = (w > 320) ? 0: Math.abs($('body').width() - w)/2;
+    var leftMargin = (w > 320) ? 0: Math.abs($('body').width() - w)/2;
 
     code.val(codestr).css("height","auto");
     if(fromColor){
