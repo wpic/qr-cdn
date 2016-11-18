@@ -13,128 +13,86 @@
     /*.container .phone .qrcode{margin-left:16px;background:#fff;display:table-cell;vertical-align: middle;width:100%;}*/
     .container .phone input, .container .phone textarea{width:100%;border:none;outline:none;height:30px;padding:2px 5px;margin-bottom: 10px;}
     .ctrl label{line-height:1.5em;margin-bottom:4px;font-weight:bolder;color:#9ccae5;}
+    .ctrl label[for='source']{margin-bottom:6px;}
     .container .phone input#source{color:#333;font-size:inherit;border:1px solid #ccc;}
     .container .phone input#code{background:#eee;padding:10px 4px 5px 4px;height:30px;white-space:nowrap;/*word-break:break-all;*/}
-    .container .ctrl{background:#fff;padding:10px 5px 0 5px;}
+    .container .ctrl{background:#fff;padding:15px 5px 0 5px;}
     .container .phoneContent{position:relative;z-index:1;padding:68px 23px 0 23px;}
     /*.container .phonebg{position:absolute;z-index:0;width:248px;height:500px;margin:20px auto;top:0;}/*iPhone.png*/*/
     #preview{width:100%;}
     #colors{width:100%;list-style:none;margin:0;padding:5px 0;background:#fff;border-top:1px solid #ccc;border-bottom:1px solid #ccc;}
     #colors li{width:15px;height:15px;border-radius:3px;display:inline-block;margin:2px;padding:0;cursor:pointer;}
     #colors li.cur{box-shadow:1px 1px black;}
+    #colors li.white{border:1px solid #ccc;}
     .qrcode{overflow:hidden;position:relative;z-index:-1;background:#fff;text-align:center;width:100%;min-height:150px;height:200px;text-align:center;}
     .qrcode img{z-index:0;position:relative;/*float:left;*/max-height:200px;}
     .qrcode img.animated{display:inline-block;}
     .container .phoneContent .size{width:100%;display:flex;list-style:none;margin:0;padding:0;padding-top:4px;padding-bottom:6px;background-color:#fff;}
-    .container .phoneContent .size li{flex:1 1 auto;margin:10px 20px;width:30%;height:30px;line-height:30px;border-radius:6px;text-align:center;border:1px solid #ccc;cursor:pointer;}
-    .container .phoneContent .size li.cur{background:#eee;color:#07C;border-color:#07C;}
+    .container .phoneContent .size li{color:#aaa;flex:1 1 auto;margin:10px 20px;width:30%;height:30px;line-height:30px;border-radius:6px;text-align:center;border:1px solid #ccc;cursor:pointer;background:linear-gradient(to bottom,#eee,#fff);background-image:-webkit-linear-gradient(top,#eee,#fff);}
+    .container .phoneContent .size li.cur{background:#eee;color:#07C;border-color:#07C;background: #9ccae5;
+    color: #fff;
+    box-shadow: inset 0px 2px 2px rgba(0,0,0,0.15),inset 0 0 3px rgba(0,0,0,0.2);
+    border-color:transparent;}
     .container .phoneScreen{background:#fff;width:100%;height:400px;position:absolute;top:68px;z-index:-10;width:304px;height:460px;}
-.clearfix:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
- }
-.clearfix { display: inline-block; }
-/* start commented backslash hack \*/
-* html .clearfix { height: 1%; }
-.clearfix { display: block; }
-/* close commented backslash hack */
+    .container .color{color:#ccc;display:inline-block;cursor:pointer;}
+    .container .color.active{color:#9ccae5; border-bottom: 1px solid #9ccae5;}
+    .container output{display:inline;}
 
-.animated {
-    -webkit-animation-duration: .5s;
-    animation-duration: .5s;
-    -webkit-animation-fill-mode: none;
-    animation-fill-mode: none;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective:0;
-    -moz-perspective:0;
-    -ms-perspective:0;
-    perspective: 1000;
-}
-.animated.quick{
-    -webkit-animation-duration: .3s;
-    animation-duration: .3s;
-}
-
-@-webkit-keyframes fadeOutLeft {
-    from {
-        opacity: 1;
+    .clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+    .clearfix{display:inline-block;}
+    /* start commented backslash hack \*/
+    * html .clearfix{height:1%;}
+    .clearfix{display:block;}
+    /* close commented backslash hack */
+    .animated{-webkit-animation-duration:.5s;animation-duration:.5s;-webkit-animation-fill-mode:none;animation-fill-mode:none;-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;backface-visibility:hidden;-webkit-perspective:0;-moz-perspective:0;-ms-perspective:0;perspective:1000;}
+    .animated.quick{-webkit-animation-duration:.3s;animation-duration:.3s;}
+    @-webkit-keyframes fadeOutLeft{
+        from{opacity:1}
+        to{opacity:0;-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0);}
     }
-
-    to {
-        opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
-        transform: translate3d(-100%, 0, 0);
+    @keyframes fadeOutLeft{
+        from{opacity:1;}
+        to{opacity:0;-webkit-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0);}
     }
-}
-
-@keyframes fadeOutLeft {
-    from {
-        opacity: 1;
+    .fadeOutLeft{-webkit-animation-name:fadeOutLeft;animation-name:fadeOutLeft;}
+    @-webkit-keyframes fadeInRight{
+        from{opacity:0;-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0);}
+        to{opacity:1;-webkit-transform:none;transform:none;}
     }
-
-    to {
-        opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
-        transform: translate3d(-100%, 0, 0);
+    @keyframes fadeInRight{
+        from{opacity:0;-webkit-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0);}
+        to{opacity:1;-webkit-transform:none;transform:none;}
     }
-}
-
-.fadeOutLeft {
-    -webkit-animation-name: fadeOutLeft;
-    animation-name: fadeOutLeft;
-}
-@-webkit-keyframes fadeInRight {
-    from {
-        opacity: 0;
-        -webkit-transform: translate3d(100%, 0, 0);
-        transform: translate3d(100%, 0, 0);
-    }
-
-    to {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        -webkit-transform: translate3d(100%, 0, 0);
-        transform: translate3d(100%, 0, 0);
-    }
-
-    to {
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-    }
-}
-
-.fadeInRight {
-    -webkit-animation-name: fadeInRight;
-    animation-name: fadeInRight;
-}
-@media (max-width : 768px){
-    body{background:#fff;font-size:12px;}
-    .container .phoneContent{background:none;}
-    .container .phone, .ctrl{width:calc(100% - 10px);height:auto;margin:0 auto;}
+    .fadeInRight{-webkit-animation-name:fadeInRight;animation-name:fadeInRight;}
+    @media(max-width :768px){body{background:#fff;font-size:12px;}
+    .container .phoneContent{background:0;}
+    .container .phone,.ctrl{width:calc(100% - 10px);height:auto;margin:0 auto;}
     #colors{width:auto;padding:5px;}
     #colors li{width:25px;height:25px;}
-    .container .phone .qrcode{width:100%;height:auto/*386px*/;/*background:#fff;*/}
-    .container .phoneContent{width:100%;height:auto;background:none;padding:0;}
-    .container .phoneContent .size, .container .phoneScreen{width:100%;}
+    .container .phone .qrcode{width:100%;height:auto;}
+    .container .phoneContent{width:100%;height:auto;background:0;padding:0;}
+    .container .phoneContent .size,.container .phoneScreen{width:100%;}
     .hidden-xs{display:none;}
     .qrcode{position:relative;display:block;}
     .qrcode img{max-width:100%;}
-}
+    }
+    *{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);-moz-tap-highlight-color: rgba(0, 0, 0, 0);}
+    label[for='switch']{position:absolute;right:4.2rem;top:-4px;}
+    .switch{position:absolute;right:0;top:-10px;display:block;vertical-align:top;width:3.2rem;height:22px;padding:3px;margin:0 10px 10px 0;background:linear-gradient(to bottom,#eee,#fff 25px);background-image:-webkit-linear-gradient(top,#eee,#fff 25px);border-radius:18px;box-shadow:inset 0 -1px white,inset 0 1px 1px rgba(0,0,0,0.05);cursor:pointer}
+    .switch-input{position:absolute;top:0;left:0;opacity:0;padding:0;height:auto;}
+    .container .phone input.switch-input{padding:0;height:inherit;}
+    .switch-label{position:relative;display:block;height:inherit;font-size:10px;text-transform:uppercase;background:#eceeef;border-radius:inherit;box-shadow:inset 0 1px 2px rgba(0,0,0,0.12),inset 0 0 2px rgba(0,0,0,0.15)}
+    .ctrl label.switch{line-height: inherit;margin-bottom:0;}
+    .switch-label:before,.switch-label:after{position:absolute;top:50%;margin-top:-.5em;line-height:1;-webkit-transition:inherit;-moz-transition:inherit;-o-transition:inherit;transition:inherit}
+    .switch-label:before{content:attr(data-off);right:8px;color:#aaa;text-shadow:0 1px rgba(255,255,255,0.5)}
+    .switch-label:after{content:attr(data-on);left:8px;color:#fff;text-shadow:0 1px rgba(0,0,0,0.2);opacity:0}
+    .switch-input:checked ~ .switch-label{background:#9ccae5;box-shadow:inset 0 1px 2px rgba(0,0,0,0.15),inset 0 0 3px rgba(0,0,0,0.2)}
+    .switch-input:checked ~ .switch-label:before{opacity:0}
+    .switch-input:checked ~ .switch-label:after{opacity:1}
+    .switch-handle{position:absolute;top:4px;left:4px;width:20px;height:20px;background:linear-gradient(to bottom,#fff 40%,#f0f0f0);background-image:-webkit-linear-gradient(top,#fff 40%,#f0f0f0);border-radius:100%;box-shadow:1px 1px 5px rgba(0,0,0,0.2)}
+    .switch-handle:before{content:"";position:absolute;top:50%;left:50%;margin:-6px 0 0 -6px;width:12px;height:12px;background:linear-gradient(to bottom,#eee,#fff);background-image:-webkit-linear-gradient(top,#eee,#fff);border-radius:6px;box-shadow:inset 0 1px rgba(0,0,0,0.02)}
+    .switch-input:checked ~ .switch-handle{left:2.1rem;box-shadow:-1px 1px 5px rgba(0,0,0,0.2)}
+    .switch-label,.switch-handle{transition:All .1s ease;-webkit-transition:All .1s ease;-moz-transition:All .1s ease;-o-transition:All .1s ease}
 </style>
 </head>
 
@@ -143,9 +101,20 @@
     <div class="phone">
         <div class="phoneContent">
             <div class="ctrl">
-                <label for="source">URL/Text:</label>
-                <input id="source" type="text" autofocus="autofocus" placeholder="">
-                <label for="source">Colors:</label>
+                <div class="content" style="position:relative;">
+                    <label for="source">URL/Text:</label>
+                    <label for="switch">Icon:</label>
+                    <label class="switch">
+                        <input class="icon switch-input" type="checkbox">
+                        <span class="switch-label" data-on="Yes" data-off="No"></span> 
+                        <span class="switch-handle"></span> 
+                    </label>
+                    <input id="source" type="text" autofocus="autofocus" placeholder="">
+                </div>
+                <label class="color active" for="colors">Colors</label> /
+                <label class="color hide" for="bgcolors">bgColors</label>
+                <input type="hidden" name="color">
+                <input type="hidden" name="bgcolor">
                 <ul id="colors"></ul>
                 <ul class="size clearfix">
                     <li class="small" size="128x128">128</li>
@@ -164,23 +133,54 @@
 </div>
 <script type="text/javascript" src="https://cdn.wpic-tools.com/jquery-v2.0.0.min.js"></script>
 <script>
-var colorLab=["#000000","#654544", "#6F92A3", "#7A83A4", "#7CAAC5", "#827C6B", "#82A398", "#9CCAE5", "#9D9B98", "#BC5B2F", "#BF918C", "#C0652C", "#C7BEAD", "#C9C0C9", "#CCC4AF", "#D55000", "#D7A125", "#D7DBE3", "#D9BFAD", "#DBA085", "#DEDBE4", "#E3C308", "#F20000", "#F65000", "#FFF200"];
+var colorLab=["#FFFFFF", "#000000","#654544", "#6F92A3", "#7A83A4", "#7CAAC5", "#827C6B", "#82A398", "#9CCAE5", "#9D9B98", "#BC5B2F", "#BF918C", "#C0652C", "#C7BEAD", "#C9C0C9", "#CCC4AF", "#D55000", "#D7A125", "#D7DBE3", "#D9BFAD", "#DBA085", "#DEDBE4", "#E3C308", "#F20000", "#F65000", "#FFF200"];
 var size=[];
 var creating=false;
 function colorSel(){
     var c = document.getElementById("colors");
+    var color = 'color';
     for(var i=0; i<colorLab.length; i++){
         var span = document.createElement("li");
         $(span).css('background-color', colorLab[i]);
+        if(colorLab[i] == "#FFFFFF"){
+            $(span).addClass('white');
+        }
         span.title = colorLab[i];
         c.appendChild(span);
     }
+    $("label.color").bind('click', function(e){
+        $("label.color").removeClass('active');
+        $(this).addClass('active');
+        if($(this).attr('for') == 'colors'){
+            color = 'color';
+        }else{
+            color = 'bgcolor';
+        }
+    });
     $("#colors li").bind('click', function(e){
         $("#colors li").removeClass("cur");
         $(this).addClass("cur");
-        var src = "http://qr-cdn.com/" + $(this).attr('title').replace(/#/g,'') + "/" + $(source).val();
+        var sel = $("#colors .cur").length > 0 ? $("#colors .cur").attr("title").replace(/#/g,'') : '';
+        if(color == 'color'){
+            $("input[name='color']").val(sel);
+        }else{
+            $("input[name='bgcolor']").val(sel);
+        }
         createQRcode(true);
     });
+}
+
+function updateSlider(value){
+    if(value == 1){
+        value = "128x128";    
+    }
+    if(value == 2){
+        value = "256x256";
+    }
+    if(value == 3){
+        value = "512x512";
+    }
+    $('output').val(value);
 }
 
 function createImg(src){
@@ -209,18 +209,29 @@ function sizeSel(){
 }
 
 function createQRcode(fromColor){
-    var color = $("#colors .cur").length > 0 ? $("#colors .cur").attr("title").replace(/#/g,'') : null;
+    // var color = $("#colors .cur").length > 0 ? $("#colors .cur").attr("title").replace(/#/g,'') : null;
+    var color = $("input[name='color']").val();
+    var bgcolor = $("input[name='bgcolor']").val();
     var text = $("#source").val().length > 0 ? $("#source").val() : location.href;
     var size = $(".phone .size .cur").length > 0 ? $(".phone .size .cur").attr("size") : null;
     // console.log(color);
-    // color/size/text/
+    // color/bgcolor/icon/size/text/
     var src = '', w=h=128;
 
     if(size != null){
         src = size + "/" + src;
         w=h=$(".phone .size .cur").text();
     }
-    if(color != null){
+
+    if($(".icon.switch-input").prop('checked')){
+        src = "icon/" + src;
+    }
+
+    if(bgcolor != ''){
+        src = bgcolor + "/" + src;
+    }
+
+    if(color != ''){
         src = color + "/" + src;
     }
     src += text;
